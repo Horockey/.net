@@ -209,13 +209,15 @@ namespace Lab2
 		public Motherboard Mb { get; }
 		public Processor Proc { get; }
 		public Disk Hdd { get; }
+		public List<ComputerPart> Aux { get; }
 
 		public Computer(
 			string name,
 			Motherboard mb,
 			Processor p,
 			Memory ram,
-			Disk hdd
+			Disk hdd,
+			List<ComputerPart> aux = null
 		) : base(name)
 		{
 			this.Price = 0;
@@ -227,19 +229,46 @@ namespace Lab2
 				}
 				this.Price += arg.Price;
 			}
+			if (aux != null) {
+				foreach (var auxElem in aux)
+				{
+					this.Price += auxElem.Price;
+				}
+			}
+			
 			this.Mb = mb;
 			this.Proc = p;
 			this.Ram = ram;
 			this.Hdd = hdd;
+			if(aux != null) this.Aux = aux;
+			else this.Aux = new List<ComputerPart>();
 		}
 		public sealed override string Describe()
 		{
 			string res = base.Describe() + "\nComputer consists of:\n\n";
 			foreach (var arg in new ComputerPart[] { this.Mb, this.Proc, this.Ram, this.Hdd })
 			{
-				res += $"Type: {arg.GetType().Name}\n" + arg.Description + "\n";
+				res += $"Type: {arg.GetType().Name}\n{arg.Description}\n";
+			}
+			res += "\nAlso aux devices attached:\n\n";
+			foreach(var aux in Aux)
+			{
+				res += $"Type: {aux.GetType().Name}\n{aux.Description}\n";
 			}
 			return res;
+		}
+		public int Attach(ComputerPart aux)
+		{
+			if (aux == null) return -1;
+			this.Aux.Add(aux);
+			this.Price += aux.Price;
+			return this.Aux.Count - 1;
+		}
+		public void Unattach(int idx)
+		{
+			if (idx < 0) return;
+			this.Aux.RemoveAt(idx);
+			this.Price -= Aux[idx].Price;
 		}
 	}
 }
