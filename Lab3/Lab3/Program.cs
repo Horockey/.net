@@ -4,12 +4,13 @@
 	{
 		static void Main(string[] args)
 		{
-			var bat = new SolarBattery(100);
+			var bat = new ElectricSource(100);
 			bat.Plug(new Kettle("Tefal", 30));
-			bat.Plug(new Kettle("Moulinex", 70));
+			bat.Plug(new Refrigerator("Moulinex", 70));
 			foreach (var el in bat.PluggedDevices){
-				Console.WriteLine(el);
+				Console.WriteLine(el.GetType().Name);
 			}
+			//bat.Plug(new Lathe("Siemens", 100));
 		}
 	}
 }

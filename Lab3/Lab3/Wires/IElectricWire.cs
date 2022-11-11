@@ -1,8 +1,6 @@
 ﻿namespace Lab3
-{
-	internal interface IElectricWire : IElectricElement
+{ 
+	internal interface IElectricWire : IElectricAppliance, IElectricSource
 	{
-		abstract public IElectricElement[] Inputs { get; set; }
-		abstract public IElectricElement[] Outputs { get; set; }
 	}
 }
