@@ -10,7 +10,7 @@
 			foreach (var el in bat.PluggedDevices){
 				Console.WriteLine(el.GetType().Name);
 			}
-			//bat.Plug(new Lathe("Siemens", 100));
+			bat.Plug(new Lathe("Siemens", 100));
 		}
 	}
 }
