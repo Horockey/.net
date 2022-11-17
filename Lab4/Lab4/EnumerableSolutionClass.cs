@@ -4,42 +4,32 @@ namespace Lab4
 {
 	internal class EnumerableSolutionClass : IEnumerable
 	{
-		private int[] storage;
-		public EnumerableSolutionClass()
+		private string s;
+		public EnumerableSolutionClass(string s)
 		{
-			this.storage = new int[0];
+			this.s = s;
 		}
-		public void AddElement(int el)
-		{
-			this.storage = this.storage.Append(el).ToArray();
-		}
-		public IEnumerator GetEnumerator() => new Enumerator(storage);
+		public IEnumerator GetEnumerator() => new Enumerator(s);
 	}
 	internal class Enumerator : IEnumerator
 	{
 		public object Current {
 			get {
-				return collection[idx]; 
+				return words[idx]; 
 			} 
 		}
 
-		public bool MoveNext() => (++idx < collection.Length); 
+		public bool MoveNext() => (++idx < words.Length); 
 		public void Reset() { idx = -1; }
 
 		public void Dispose() { }
 
-		private int[] collection;
+		private string[] words;
 		private int idx;
 
-		public Enumerator(int[] collection)
+		public Enumerator(string s)
 		{
-			if (collection == null)
-			{
-				throw new ArgumentNullException();
-			}
-			this.collection = collection;
-			this.idx = -1;
+			this.words = s.Split(' ');
 		}
-
 	}
 }

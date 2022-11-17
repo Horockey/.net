@@ -4,22 +4,18 @@ namespace Lab4
 {
 	internal class EnumFuncSolutionClass
 	{
-		private int[] storage;
-		public void AddElement(int el)
+		private string[] words;
+		public EnumFuncSolutionClass(string s)
 		{
-			storage = storage.Append(el).ToArray();
-		}
-		public EnumFuncSolutionClass()
-		{
-			this.storage = new int[0];
+			this.words = s.Split(' ');
 		}
 		public IEnumerable Range(int from, int to)
 		{
 			for(int i = from; i < to; i++)
 			{
-				yield return this.storage[i];
+				yield return this.words[i];
 			}
 		}
-		public int Size{ get {return this.storage.Length; } }
+		public int Size{ get {return this.words.Length; } }
 	}
 }
